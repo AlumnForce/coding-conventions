@@ -19,7 +19,7 @@ _WIP_
   * PK: do not repeat the table's name, and typically call it simply `id`.
   * FK column's name MUST be named `<referenced-table>_<referenced-column>`, example: `user_id`.
   * Add `_id` suffix for int columns
-  * Add `_ext_ref` suffix for external references columns, example: `diploma_ext_ref`
+  * Add `_ext_ref` suffix for external references columns, example: `degree_ext_ref`
   * Boolean: `is_x TINYINT`
 
 * No need of CONSTRAINT clause when defining a foreign key:
@@ -47,7 +47,7 @@ So prefer: `user_id UNSIGNED INT`.
     
 * Use COMMENT on columns and keep them up to date.
 
-* Don't forget our 2 "system" columns managed by MySQL itself:
+* Don't forget our 2 “system” columns managed by MySQL itself:
   ```sql
   created TIMESTAMP NOT NULL DEFAULT NOW(),
   updated TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
@@ -55,6 +55,23 @@ So prefer: `user_id UNSIGNED INT`.
   These 2 columns should never be used in writing by application code!
   
 ### <a name="queries"></a>Queries
+
+* All keywords in CAPITALS.
+
+* Do not put backticks `` ` `` around a table or column name if not necessary, this complicates reading.
+
+* Always specify which type of join: `LEFT JOIN`, `INNER JOIN`, other?
+
+* Use table alias as soon as there is more than one table in the query, and prefix each column name with them.
+Example: 
+```
+    SELECT U.id, D.name
+    FROM user U
+    INNER JOIN degree D ON D.id = U.degree_id
+    WHERE ...
+```
+
+* Any SELECT must have a `LIMIT` clause, with the possible exception of exports.
 
 ### <a name="patches"></a>Patches
 
