@@ -8,8 +8,12 @@ _WIP_
   * [Queries](#queries)
   * [Patches](#patches)
 * [PHP](#php)
- 
+
+
+
 ## <a name="mysql"></a>MySQL
+
+
 
 ### <a name="schemas"></a>Schemas
 
@@ -53,7 +57,9 @@ So prefer: `user_id UNSIGNED INT`.
   updated TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   ```
   These 2 columns should never be used in writing by application code!
-  
+
+
+
 ### <a name="queries"></a>Queries
 
 * All keywords in CAPITALS.
@@ -64,7 +70,7 @@ So prefer: `user_id UNSIGNED INT`.
 
 * Use table alias as soon as there is more than one table in the query, and prefix each column name with them.
 Example: 
-```
+```sql
     SELECT U.id, D.name
     FROM user U
     INNER JOIN degree D ON D.id = U.degree_id
@@ -73,7 +79,43 @@ Example:
 
 * Any SELECT must have a `LIMIT` clause, with the possible exception of exports.
 
+
+
 ### <a name="patches"></a>Patches
+
+Because `IF EXISTS` doesn't exist for many [DDL](https://en.wikipedia.org/wiki/Data_definition_language) statements
+we need to encapsulate some SQL instructions in a stored procedure.
+
+Systematically make sure to remove the possible existing in order to reconstruct and guarantee the expected result:
+for example make a `DROP INDEX` before the `CREATE INDEX` because perhaps it does not target the same columns.  
+
+Approach adopted after **vote**:
+
+```sql
+    DROP PROCEDURE IF EXISTS clean;
+    
+    DELIMITER //
+    CREATE PROCEDURE clean()
+    BEGIN
+        SET @exists = (
+            SELECT count(*)
+            FROM information_schema.statistics
+            WHERE table_name = 'bounce' AND index_name = 'campaign_id' AND table_schema = database()
+        );
+        IF @exists > 0 THEN
+            DROP INDEX campaign_id ON bounces;
+        END IF;
+    END //
+    DELIMITER ;
+    
+    CALL clean();
+    DROP PROCEDURE IF EXISTS clean;
+    
+    -- True payload:
+    CREATE INDEX campaign_id ON bounce (campaign_id);
+```
+
+
 
 ## <a name="php"></a>PHP
 
