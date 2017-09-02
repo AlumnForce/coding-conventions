@@ -13,6 +13,7 @@ _WIP_
   * [Notation](#notation)
   * [OOP](#oop)
   * [PHPDoc](#phpdoc)
+  * [Practical cases](#practicalcases)
 
 
 
@@ -147,7 +148,8 @@ We follow the standards defined in the
 * Use camelCase. Acronyms have only their first letter in capital: `getPsrLogger()`, `$mySqlQuery`.
 * Always use `[]` notation for arrays.
 * Place unary operators adjacent to the affected variable, 
-with the excpetion of negation operator: `$a++`, `$a--`, `if (! $expr) {…}`
+with the excpetion of negation operator and casting:
+`$a++`, `$a--`, `if (! $expr) {…}`, `$foo = (int) $bar;`
 * Add a single space around binary operators, 
 including concatenation operator: `$a && $b`, `$a . $b`
 
@@ -155,7 +157,7 @@ including concatenation operator: `$a && $b`, `$a . $b`
 
 ### <a name="oop"></a>OOP
 
-* By default every class property must be private.
+* By default every class property and every instance property must be private.
 * Do not use magical methods (or prove that there was no alternative).
 * All function calls must have parenthesis, even constructor: `new MyClass()`.
 
@@ -174,3 +176,129 @@ including concatenation operator: `$a && $b`, `$a . $b`
   * ~~@access private~~
   * ~~@internal~~
   * ~~@static~~
+
+
+
+### <a name="practicalcases"></a>Practical cases
+
+#### On-the-fly assignment
+
+On-the-fly assignment must be avoided because not very readable:
+~~if (($myId = $obj->getById())) {...}~~.
+
+Write:
+```php
+    $myId = $obj->getById();
+    if ($myId !== null) {
+        // ...
+    }
+```
+
+#### Implicit if
+
+Implicit `if` must be avoided because not very readable:
+* ~~\<expression> and \<statement>;~~
+* ~~\<expression> && \<statement>;~~
+
+Write:
+```php
+    if (<expression>) {
+        <statement>
+    }
+```
+
+#### Approximate test
+
+Let: ~~if (\<expression> === true) {...}~~,
+if `<expression>` is of boolean type, then simply write: `if (<expression>) {…}`.
+
+If `<expression>` is not a boolean then be specific, _e.g._ `if (preg_match(...) > 0) {...}`
+
+#### Switch hack
+
+To avoid: ~~switch (true) {...}~~
+
+If `case` expressions are not deductible from the same variable, then use `if/elseif`.
+
+#### Remote return
+
+Instead of:
+```php
+    if ($expression) {
+        return $foo;
+    }
+
+    // many lines...
+
+    return $bar;
+```
+
+Write:
+```php
+    if ($expression) {
+        return $foo;
+    } else {
+        // many lines...
+        return $bar;
+    }
+```
+
+Or better, only one `return` if possible:
+```php
+    if ($expression) {
+        $value = $foo;
+    } else {
+        // many lines...
+        $value = $bar;
+    }
+    
+    return $value;
+```
+
+#### Mixed return types
+
+For a given function, do not use more than one data type for return value.
+
+Bad, because of the mixture between `array` and `int`:
+```php
+    /**
+     * @return array|int
+     */
+    function (…) {
+        if (…) {
+            return [1, 2, 3];
+        } else {
+            return 5;
+        }
+    }
+```
+
+Rewrite as follows:
+```php
+    /**
+     * @return array
+     */
+    function (…) {
+        if (…) {
+            return [1, 2, 3];
+        } else {
+            return [5];
+        }
+    }
+```
+
+* Same for the `string|null` case.
+* The empty object being `null`, it's ok with `MyClass|null` case.
+* The management of unexpected errors must be done via exceptions.
+
+#### Emptyness
+
+Redundant: `if (! isset($params['foo']) || empty($params['foo'])) {…}`.
+
+This is equivalent to: `if (empty($params['foo'])) {…}`.
+
+#### Variable name differentiation
+
+Not very readable: `foreach ($items as $item) {…}`.
+
+For example, improve in this way: `foreach ($allItems as $item) {…}`.
