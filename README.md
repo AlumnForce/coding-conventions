@@ -155,7 +155,7 @@ including concatenation operator: `$a && $b`, `$a . $b`
 
 ### <a name="oop"></a>OOP
 
-* By default each class' or instance's property must be private.
+* By default every class property must be private.
 * Do not use magical methods (or prove that there was no alternative).
 * All function calls must have parenthesis, even constructor: `new MyClass()`.
 
