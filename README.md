@@ -1,6 +1,6 @@
 # AlumnForce Coding Conventions
 
-_WIP_
+
 
 ## Table of Contents
 * [MySQL](#mysql)
