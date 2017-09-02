@@ -8,6 +8,11 @@ _WIP_
   * [Queries](#queries)
   * [Patches](#patches)
 * [PHP](#php)
+  * [General](#general)
+  * [Composer](#composer)
+  * [Notation](#notation)
+  * [OOP](#oop)
+  * [PHPDoc](#phpdoc)
 
 
 
@@ -119,7 +124,53 @@ Approach adopted after **vote**:
 
 ## <a name="php"></a>PHP
 
+
+
+### <a name="general"></a>General
+
 We follow the standards defined in the
 [PSR-0](http://www.php-fig.org/psr/psr-0/), 
 [PSR-1](http://www.php-fig.org/psr/psr-1/) and 
 [PSR-2](http://www.php-fig.org/psr/psr-2/) documents.
+
+
+
+### <a name="composer"></a>Composer
+
+* Allways specify tag/version for each dependency into `composer.json`.
+* The `composer.lock` must be commit.
+
+
+
+### <a name="notation"></a>Notation
+
+* Use camelCase. Acronyms have only their first letter in capital: `getPsrLogger()`, `$mySqlQuery`.
+* Always use `[]` notation for arrays.
+* Place unary operators adjacent to the affected variable, 
+with the excpetion of negation operator: `$a++`, `$a--`, `if (! $expr) {…}`
+* Add a single space around binary operators, 
+including concatenation operator: `$a && $b`, `$a . $b`
+
+
+
+### <a name="oop"></a>OOP
+
+* By default each class' or instance's property must be private.
+* Do not use magical methods (or prove that there was no alternative).
+* All function calls must have parenthesis, even constructor: `new MyClass()`.
+
+
+
+### <a name="phpdoc"></a>PHPDoc
+
+* Always document structure of array parameters and array returns.
+* Avoid ~~@param array~~, be as accurate as possible. Examples:
+`@param int[] <description> <structure>`,
+`@param ThisClass[] <description> <structure>`.
+* These annotations are forbidden because without any added value:
+  * ~~@abstract~~
+  * ~~@access public~~
+  * ~~@access protected~~
+  * ~~@access private~~
+  * ~~@internal~~
+  * ~~@static~~
