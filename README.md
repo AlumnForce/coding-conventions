@@ -1,6 +1,10 @@
-<p align="center">
-    <img title="Alumnforce" height="75" src="https://www.alumni-grandes-ecoles.com/medias/image/25222232857a2f75044567.png" />
-</p>
+<a href="https://www.alumnforce.com/">
+    <p align="center">
+        <img title="AlumnForce" src="alumnforce-logo.png" />
+    </p>
+</a>
+
+
 
 # AlumnForce Coding Conventions
 
