@@ -148,6 +148,7 @@ We follow the standards defined in the
 
 * Allways specify tag/version for each dependency into `composer.json`.
 * The `composer.lock` must be commit.
+* The format `Alumnforce\PackageName` should be used as namespace.
 
 
 
