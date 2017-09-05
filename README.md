@@ -53,14 +53,14 @@ Examples: `user_id_fk` or `col1_col2_idx`.
 * Don't forget `UNSIGNED` types: `user_id UNSIGNED INT`.
 
 * Stop specifying a never used display width with integers' declaration:
-`INT(1)` allows to store exactly same integers as `INT(11)`. 
+`INT(1)` allows to store exactly the same integers as `INT(11)`. 
 So prefer: `user_id UNSIGNED INT`.
 
-* Add a maximum of integrity constraints: `UNIQUE`, `FK`, `NOT NULL`…
+* Add as many integrity constraints as you can: `UNIQUE`, `FK`, `NOT NULL`…
 
 * About text columns:
-  * use `CHAR(x)` for fixed-length strings, else `VARCHAR(x)` for strings of length at most `x`
-  * if no product justification, write `VARCHAR(255)` instead of any value < 255
+  * use `CHAR(x)` for fixed-length strings, and `VARCHAR(x)` for strings of length at most `x`
+  * if there is no product justification, write `VARCHAR(255)` instead of any value < 255
   * prefer `VARCHAR(255)` to `VARCHAR()` because by default the latter is equivalent to `VARCHAR(65535)`
     
 * Use COMMENT on columns and keep them up to date.
@@ -82,7 +82,7 @@ So prefer: `user_id UNSIGNED INT`.
 
 * Always specify which type of join: `LEFT JOIN`, `INNER JOIN`, other?
 
-* Use table alias as soon as there is more than one table in the query, and prefix each column name with them.
+* Use table aliases as soon as there is more than one table in the query, and prefix each column name with them.
 Example: 
 ```sql
     SELECT U.id, D.name
@@ -147,7 +147,7 @@ We follow the standards defined in the
 ### <a name="composer"></a>Composer
 
 * Allways specify tag/version for each dependency into `composer.json`.
-* The `composer.lock` must be commit.
+* The `composer.lock` must be commited.
 
 
 
@@ -309,4 +309,4 @@ This is equivalent to: `if (empty($params['foo'])) {…}`.
 
 Not very readable: `foreach ($items as $item) {…}`.
 
-For example, improve in this way: `foreach ($allItems as $item) {…}`.
+For example, improve it this way: `foreach ($allItems as $item) {…}`.
