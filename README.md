@@ -37,7 +37,7 @@
   * PK: do not repeat the table's name, and typically call it simply `id`.
   * FK column's name MUST be named `<referenced-table>_<referenced-column>`, example: `user_id`.
   * Add `_id` suffix for int columns
-  * Add `_ext_ref` suffix for external references columns, example: `degree_ext_ref`
+  * Add `_ext_id` suffix for external references columns, example: `degree_ext_id`
   * Boolean: `is_x TINYINT`
 
 * No need of CONSTRAINT clause when defining a foreign key:
