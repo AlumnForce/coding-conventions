@@ -68,8 +68,8 @@ So prefer: `user_id UNSIGNED INT`.
 
 * Don't forget our 2 “system” columns managed by MySQL itself:
   ```sql
-  created TIMESTAMP NOT NULL DEFAULT NOW(),
-  updated TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   ```
   These 2 columns should never be used in writing by application code!
 
