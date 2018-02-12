@@ -223,6 +223,22 @@ if `<expression>` is of boolean type, then simply write: `if (<expression>) {…
 
 If `<expression>` is not a boolean then be specific, _e.g._ `if (preg_match(...) > 0) {...}`
 
+#### Yoda Conditions
+
+When doing logical comparisons involving variables, always put the variable on the right side and put constants, literals, or function calls on the left side. If neither side is a variable, the order is not important. (In computer science terms, in comparisons always try to put l-values on the right and r-values on the left.)
+
+```php
+if ( true == $the_force ) {
+    $victorious = you_will( $be );
+}
+```
+
+In the above example, if you omit an equals sign (admit it, it happens even to the most seasoned of us), you’ll get a parse error, because you can’t assign to a constant like true. If the statement were the other way around ( $the_force = true ), the assignment would be perfectly valid, returning 1, causing the if statement to evaluate to true, and you could be chasing that bug for a while.
+
+A little bizarre, it is, to read. Get used to it, you will.
+
+This applies to ==, !=, ===, and !==. Yoda conditions for <, >, <= or >= are significantly more difficult to read and are best avoided.
+
 #### Switch hack
 
 To avoid: ~~switch (true) {...}~~
