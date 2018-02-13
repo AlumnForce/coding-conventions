@@ -50,6 +50,8 @@ Examples: `user_id_fk` or `col1_col2_idx`.
 
 * By default, always set FK with `ON UPDATE CASCADE ON DELETE RESTRICT`.
 
+* Avoid `DEFAULT` values, unless you have a good reason for it.
+
 * Don't forget `UNSIGNED` types: `user_id UNSIGNED INT`.
 
 * Stop specifying a never used display width with integers' declaration:
