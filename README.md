@@ -163,6 +163,7 @@ with the excpetion of negation operator and casting:
 `$a++`, `$a--`, `if (! $expr) {…}`, `$foo = (int) $bar;`
 * Add a single space around binary operators, 
 including concatenation operator: `$a && $b`, `$a . $b`
+* We [voted](https://github.com/AlumnForce/coding-conventions/pull/6) against [Yoda conditions](https://en.wikipedia.org/wiki/Yoda_conditions).
 
 
 
