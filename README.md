@@ -37,6 +37,7 @@
   * PK: do not repeat the table's name, and typically call it simply `id`.
   * FK column's name MUST be named `<referenced-table>_<referenced-column>`, example: `user_id`.
   * Add `_id` suffix for int columns
+  * Add `_at` suffix for timestamp columns, example: `created_at`
   * Add `_ext_id` suffix for external references columns, example: `degree_ext_id`
   * Boolean: `is_x TINYINT`
 
@@ -69,8 +70,8 @@ So prefer: `user_id UNSIGNED INT`.
 
 * Don't forget our 2 “system” columns managed by MySQL itself:
   ```sql
-  created TIMESTAMP NOT NULL DEFAULT NOW(),
-  updated TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
   ```
   These 2 columns should never be used in writing by application code!
 
