@@ -5,6 +5,9 @@
 </a>
 
 
+# Deprecated
+
+> This repository is deprecated since we follow PSR 1 and PSR 2 recommandations
 
 # AlumnForce Coding Conventions
 
